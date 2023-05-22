@@ -184,23 +184,23 @@ $(document).ready(function () {
         },
         data: {
             // Event title
-            title: "Ram and Antara's Wedding",
+            title: "Harsh & Tanisha Wedding",
 
             // Event start date
-            start: new Date('Nov 27, 2017 10:00'),
+            start: new Date('Sept 8, 2023 10:00'),
 
             // Event duration (IN MINUTES)
             // duration: 120,
 
             // You can also choose to set an end time
             // If an end time is set, this will take precedence over duration
-            end: new Date('Nov 29, 2017 00:00'),
+            end: new Date('Sept 9, 2023 00:00'),
 
             // Event Address
-            address: 'ITC Fortune Park Hotel, Kolkata',
+            address: 'Corona, CA',
 
             // Event Description
-            description: "We can't wait to see you on our big day. For any queries or issues, please contact Mr. Amit Roy at +91 9876543210."
+            description: "For any questions please text Harsh at 7049417026."
         }
     });
 
@@ -209,30 +209,74 @@ $(document).ready(function () {
 
     /********************** RSVP **********************/
     $('#rsvp-form').on('submit', function (e) {
+
+        var one_invite = ["Yatin Kishan", "Tanisha Kishan", "Sheetal Raja/Atma", "Maniba", "Bimal Patel", "Sonya Patel", "Sarina Patel", "Sieanna Patel", "Nanima?", "Savita Patel", "Ganga Patel", "Sheila Patel", "Iqbal Jusab", "Daksha Makanji", "Bipin Hirabhai Patel", "Prafula Harakchand", "Sunil Mody"];
+        var two_invite = ["Suresh Kishan", "Divayesh Patel", "Bipin Patel", "Anil Patel", "Vijay Patel", "Raj Talati", "Amit Upadhyay", "Mahendra Raja", "Sunil Amin", "Thakor Patel", "Varun Hemraj", "Ritesh Patel", "Navin Patel", "Rama Patel", "Dhimant Patel", "Arvind Kishan", "Pravin Patel", "Bipin Patel", "Samir Patel", "Ketan Kumar", "Manu Seth", "Mahesh Patel", "Pravin Patel", "Mahesh Gor", "Khantilal Patel", "Arti Jariwala", "Nitin (Jock) Patel", "Kamlesh Patel", "Heral Patel", "Harshad Patel", "Harshad Bhula", "Navnit Patel", "Manish Jariwala", "Kiran Patel", "Hitesh Patel", "Mangu Patel", "Satu", "Bharat", "Dhaya", "Natu", "Pinky Patel", "Milan Patel", "Ketan Patel", "Ila Patel", "Kalpna Shah", "Vanita Patel", "Brea McPherson", "Abigail Durham", "Shyann Cook", "Haley Turner", "Vina Patel", "Krishna Patel", "Lali Patel", "Pari Patel", "Manisha Patel", "Kamini Talati", "Smita Upadhyay", "Aruna Raja", "Preetal Amin", "Ila Patel", "Krupa Hemraj", "Meghan Patel", "Judy Patel", "Mamiba?", "Susila Patel", "Kanila Kishan", "Bina Patel", "Neela Patel", "Priti Patel", "Ila Kumar", "Savita Seth", "Damu Patel", "Hansa Patel", "Jagruti Gor", "Kusum Patel", "Ahshan Jariwala", "Smita Patel", "Varsha Patel", "Heena Patel", "Hemlata Patel", "Sharda Bhula", "Sarla Patel", "Rekha Jariwala", "Tanuja Patel", "Vanita Patel", "Neila Patel", "Naren", "Bhanu", "Indu", "Pramila", "Mahendra Patel", "Kavita Patel", "Urvee Patel", "Gary Patel", "Shuresh Shah", "Jayu Patel", "Alan McPherson", "James Durham", "Elijah Williams", "Grant Turner"];
+        var three_invite = ["Prakash Kishan", "Jiten Patel", "Manju Kishan", "Reshma Patel", "Brijesh Kishan", "Dhavin Patel"];
+        var four_invite = ["Dilip Kuntawala", "Sanjay Patel", "Mukesh Patel", "Alpesh Patel", "Vikash Patel", "Nikki Patel", "Vanita Kuntawala", "Rashmi Patel", "Anju Patel", "Nilam Patel", "Ayushi Patel", "Reena Patel", "Henita Kuntawala", "Alisha Patel", "Myan Patel", "Layla Patel", "Kairav Patel", "Aidan Patel", "Shreya Kuntawala", "Alaina Patel", "Dylan Patel", "Skyler Patel", "Akira Patel", "Laila Patel"];
+
         e.preventDefault();
         var data = $(this).serialize();
+        console.log(data);
+        if (one_invite.includes($('#guest_name').val())) {
+            var userChoice = prompt('You have 1 Invite, how many will be attending?');
+            var userChoice = Number(userChoice);
+            if (userChoice > 1){
+                userChoice = prompt('Please enter how many in your party will be attending?');
+            }
+            console.log("One person invite");
+        } else if (two_invite.includes($('#guest_name').val())) {
+            var userChoice = prompt('You have 2 Invite, how many will be attending?');
+            var userChoice = Number(userChoice);
+            while (userChoice > 2) {
+                userChoice = prompt('Please enter a number below 2');
+            } 
+            console.log("two person invite");
+        }else if (three_invite.includes($('#guest_name').val())) {
+            var userChoice = prompt('You have 3 Invite, how many will be attending?');
+            var userChoice = Number(userChoice);
+            while (userChoice > 3) {
+                userChoice = prompt('Please enter a number below 3');
+            } 
+            console.log("three person invite");
+        }else if (four_invite.includes($('#guest_name').val())) {
+            var userChoice = prompt('You have 4 Invite, how many will be attending?');
+            var userChoice = Number(userChoice);
+            while (userChoice > 4) {
+                userChoice = prompt('Please enter a number below 4');
+            } 
+            console.log("four person invite");
+        }else {
+            userChoice = prompt('Please enter how many will be attending');
+        }
+        console.log("STARTING THE ELEMENT STUFF");
+        var inputF = document.getElementById("numOfPeople");
+        inputF.value = userChoice.toString();
+        console.log(inputF.value);
+        data += '&extras=' + userChoice.toString();
+        console.log(data);
+        
 
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
 
-        if (MD5($('#invite_code').val()) !== 'b0e53b10c1f55ede516b240036b88f40'
-            && MD5($('#invite_code').val()) !== '2ac7f43695eb0479d5846bb38eec59cc') {
-            $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
-        } else {
-            $.post('https://script.google.com/macros/s/AKfycbyMMAoVGkmQvM8W2YnB84WfTwGCYpVdILwyUTlPwf8KiSf2y56-4nQOgnKOQR-cnuBj_A/exec', data)
-                .done(function (data) {
-                    console.log(data);
-                    if (data.result === "error") {
-                        $('#alert-wrapper').html(alert_markup('danger', data.message));
-                    } else {
-                        $('#alert-wrapper').html('');
-                        $('#rsvp-modal').modal('show');
-                    }
-                })
-                .fail(function (data) {
-                    console.log(data);
-                    $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
-                });
-        }
+        // if ($('#guest_name').val() == 'Harsh') {
+        //     $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
+        // } else {
+        $.post('https://script.google.com/macros/s/AKfycbzOKM2uo3GIgb2h_0uvW8nXIysJ-H9rEIPOnHQhy80KuKyzdLaD6-pWu7y7jOkzPOOpow/exec', data)
+            .done(function (data) {
+                console.log(data);
+                if (data.result === "error") {
+                    $('#alert-wrapper').html(alert_markup('danger', data.message));
+                } else {
+                    $('#alert-wrapper').html('');
+                    $('#rsvp-modal').modal('show');
+                }
+            })
+            .fail(function (data) {
+                console.log(data);
+                $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+            });
+        // }
     });
 
 });
