@@ -206,11 +206,52 @@ $(document).ready(function () {
 
     $('#add-to-cal').html(myCalendar);
 
+    // $('#rsvp-form').on('submit', function (e) {
+    //     console.log("harsh");
+    //     $('#rsvp-modal').modal('show');
+    //     console.log("harsh");
+    // });
+
+    $('#submitbtn').click(function() {
+        // var data = $(this).serialize();
+        $('#find-modal').modal('hide');
+        
+        data2 = sessionStorage.getItem("data");
+        // var event1 = document.getElementById("event1").value;
+        data2 += '&event1=' + document.getElementById("event1").value;
+        data2 += '&event2=' + document.getElementById("event2").value;
+        data2 += '&event3=' + document.getElementById("event3").value;
+        data2 += '&event4=' + document.getElementById("event4").value;
+        data2 += '&event5=' + document.getElementById("event5").value;
+        data2 += '&event6=' + document.getElementById("event6").value;
+
+        console.log(data2);
+        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
+
+        // if ($('#guest_name').val() == 'Harsh') {
+        //     $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
+        // } else {
+        $.post('https://script.google.com/macros/s/AKfycbzOKM2uo3GIgb2h_0uvW8nXIysJ-H9rEIPOnHQhy80KuKyzdLaD6-pWu7y7jOkzPOOpow/exec', data2)
+            .done(function (data2) {
+                console.log(data2);
+                if (data2.result === "error") {
+                    $('#alert-wrapper').html(alert_markup('danger', data2.message));
+                } else {
+                    $('#alert-wrapper').html('');
+                    $('#rsvp-modal').modal('show');
+                }
+            })
+            .fail(function (data2) {
+                console.log(data2);
+                $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+            });
+        // $('#rsvp-modal').modal('show');
+     });
 
     /********************** RSVP **********************/
     $('#rsvp-form').on('submit', function (e) {
 
-        var one_invite = ["Yatin Kishan", "Tanisha Kishan", "Sheetal Raja/Atma", "Maniba", "Bimal Patel", "Sonya Patel", "Sarina Patel", "Sieanna Patel", "Nanima?", "Savita Patel", "Ganga Patel", "Sheila Patel", "Iqbal Jusab", "Daksha Makanji", "Bipin Hirabhai Patel", "Prafula Harakchand", "Sunil Mody"];
+        var one_invite = ["Yatin Kishan", "Tanisha Kishan", "Sheetal Raja/Atma", "Maniba", "Bimal Patel", "Sonya Patel", "Sarina Patel", "Sieanna Patel", "Nanima", "Savita Patel", "Ganga Patel", "Sheila Patel", "Iqbal Jusab", "Daksha Makanji", "Bipin Hirabhai Patel", "Prafula Harakchand", "Sunil Mody"];
         var two_invite = ["Suresh Kishan", "Divayesh Patel", "Bipin Patel", "Anil Patel", "Vijay Patel", "Raj Talati", "Amit Upadhyay", "Mahendra Raja", "Sunil Amin", "Thakor Patel", "Varun Hemraj", "Ritesh Patel", "Navin Patel", "Rama Patel", "Dhimant Patel", "Arvind Kishan", "Pravin Patel", "Bipin Patel", "Samir Patel", "Ketan Kumar", "Manu Seth", "Mahesh Patel", "Pravin Patel", "Mahesh Gor", "Khantilal Patel", "Arti Jariwala", "Nitin (Jock) Patel", "Kamlesh Patel", "Heral Patel", "Harshad Patel", "Harshad Bhula", "Navnit Patel", "Manish Jariwala", "Kiran Patel", "Hitesh Patel", "Mangu Patel", "Satu", "Bharat", "Dhaya", "Natu", "Pinky Patel", "Milan Patel", "Ketan Patel", "Ila Patel", "Kalpna Shah", "Vanita Patel", "Brea McPherson", "Abigail Durham", "Shyann Cook", "Haley Turner", "Vina Patel", "Krishna Patel", "Lali Patel", "Pari Patel", "Manisha Patel", "Kamini Talati", "Smita Upadhyay", "Aruna Raja", "Preetal Amin", "Ila Patel", "Krupa Hemraj", "Meghan Patel", "Judy Patel", "Mamiba?", "Susila Patel", "Kanila Kishan", "Bina Patel", "Neela Patel", "Priti Patel", "Ila Kumar", "Savita Seth", "Damu Patel", "Hansa Patel", "Jagruti Gor", "Kusum Patel", "Ahshan Jariwala", "Smita Patel", "Varsha Patel", "Heena Patel", "Hemlata Patel", "Sharda Bhula", "Sarla Patel", "Rekha Jariwala", "Tanuja Patel", "Vanita Patel", "Neila Patel", "Naren", "Bhanu", "Indu", "Pramila", "Mahendra Patel", "Kavita Patel", "Urvee Patel", "Gary Patel", "Shuresh Shah", "Jayu Patel", "Alan McPherson", "James Durham", "Elijah Williams", "Grant Turner"];
         var three_invite = ["Prakash Kishan", "Jiten Patel", "Manju Kishan", "Reshma Patel", "Brijesh Kishan", "Dhavin Patel"];
         var four_invite = ["Dilip Kuntawala", "Sanjay Patel", "Mukesh Patel", "Alpesh Patel", "Vikash Patel", "Nikki Patel", "Vanita Kuntawala", "Rashmi Patel", "Anju Patel", "Nilam Patel", "Ayushi Patel", "Reena Patel", "Henita Kuntawala", "Alisha Patel", "Myan Patel", "Layla Patel", "Kairav Patel", "Aidan Patel", "Shreya Kuntawala", "Alaina Patel", "Dylan Patel", "Skyler Patel", "Akira Patel", "Laila Patel"];
@@ -218,68 +259,95 @@ $(document).ready(function () {
         e.preventDefault();
         var data = $(this).serialize();
         console.log(data);
+        var nums1 =1;
         if (one_invite.includes($('#guest_name').val())) {
-            var userChoice = prompt('You have 1 Invite, how many will be attending?');
-            var userChoice = Number(userChoice);
-            if (userChoice > 1){
-                userChoice = prompt('Please enter how many in your party will be attending?');
-            }
-            console.log("One person invite");
+            nums1 = 1;
+            // var userChoice = prompt('You have 1 Invite, how many will be attending?');
+            // var userChoice = Number(userChoice);
+            // if (userChoice > 1){
+            //     userChoice = prompt('Please enter how many in your party will be attending?');
+            // }
+            // console.log("One person invite");
         } else if (two_invite.includes($('#guest_name').val())) {
-            var userChoice = prompt('You have 2 Invite, how many will be attending?');
-            var userChoice = Number(userChoice);
-            while (userChoice > 2) {
-                userChoice = prompt('Please enter a number below 2');
-            } 
-            console.log("two person invite");
+            nums1 =2;
+            // var userChoice = prompt('You have 2 Invite, how many will be attending?');
+            // var userChoice = Number(userChoice);
+            // while (userChoice > 2) {
+            //     userChoice = prompt('Please enter a number below 2');
+            // } 
+            // console.log("two person invite");
         }else if (three_invite.includes($('#guest_name').val())) {
-            var userChoice = prompt('You have 3 Invite, how many will be attending?');
-            var userChoice = Number(userChoice);
-            while (userChoice > 3) {
-                userChoice = prompt('Please enter a number below 3');
-            } 
-            console.log("three person invite");
+            nums1=3
+            // var userChoice = prompt('You have 3 Invite, how many will be attending?');
+            // var userChoice = Number(userChoice);
+            // while (userChoice > 3) {
+            //     userChoice = prompt('Please enter a number below 3');
+            // } 
+            // console.log("three person invite");
         }else if (four_invite.includes($('#guest_name').val())) {
-            var userChoice = prompt('You have 4 Invite, how many will be attending?');
-            var userChoice = Number(userChoice);
-            while (userChoice > 4) {
-                userChoice = prompt('Please enter a number below 4');
-            } 
-            console.log("four person invite");
+            nums1 = 4;
+            // var userChoice = prompt('You have 4 Invite, how many will be attending?');
+            // var userChoice = Number(userChoice);
+            // while (userChoice > 4) {
+            //     userChoice = prompt('Please enter a number below 4');
+            // } 
+            // console.log("four person invite");
         }else {
-            userChoice = prompt('Please enter how many will be attending');
+            nums1 = 3;
         }
         console.log("STARTING THE ELEMENT STUFF");
-        var inputF = document.getElementById("numOfPeople");
-        inputF.value = userChoice.toString();
-        console.log(inputF.value);
-        data += '&extras=' + userChoice.toString();
-        console.log(data);
+        // var inputF = document.getElementById("numOfPeople");
+        // inputF.value = userChoice.toString();
+        // console.log(inputF.value);
+        // data += '&extras=' + userChoice.toString();
+        // console.log(data);
+
+        $("#modal_body").html(nums1);
+        
+        $('#event1').attr('value',nums1);
+        $('#event1').attr('max',nums1);
+        $('#event2').attr('value',nums1);
+        $('#event2').attr('max',nums1);
+        $('#event3').attr('value',nums1);
+        $('#event3').attr('max',nums1);
+        $('#event4').attr('value',nums1);
+        $('#event4').attr('max',nums1);
+        $('#event5').attr('value',nums1);
+        $('#event5').attr('max',nums1);
+        $('#event6').attr('value',nums1);
+        $('#event6').attr('max',nums1);
+        $('#find-modal').modal('show');
+        // var event1 = document.getElementById("event1");
+        // data += '&event1=' + event1.value;
+        // console.log(data);
+        sessionStorage.setItem("data",data);
         
 
-        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
+        // $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
 
-        // if ($('#guest_name').val() == 'Harsh') {
-        //     $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
-        // } else {
-        $.post('https://script.google.com/macros/s/AKfycbzOKM2uo3GIgb2h_0uvW8nXIysJ-H9rEIPOnHQhy80KuKyzdLaD6-pWu7y7jOkzPOOpow/exec', data)
-            .done(function (data) {
-                console.log(data);
-                if (data.result === "error") {
-                    $('#alert-wrapper').html(alert_markup('danger', data.message));
-                } else {
-                    $('#alert-wrapper').html('');
-                    $('#rsvp-modal').modal('show');
-                }
-            })
-            .fail(function (data) {
-                console.log(data);
-                $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
-            });
+        // // if ($('#guest_name').val() == 'Harsh') {
+        // //     $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
+        // // } else {
+        // $.post('https://script.google.com/macros/s/AKfycbzOKM2uo3GIgb2h_0uvW8nXIysJ-H9rEIPOnHQhy80KuKyzdLaD6-pWu7y7jOkzPOOpow/exec', data)
+        //     .done(function (data) {
+        //         console.log(data);
+        //         if (data.result === "error") {
+        //             $('#alert-wrapper').html(alert_markup('danger', data.message));
+        //         } else {
+        //             $('#alert-wrapper').html('');
+        //             $('#rsvp-modal').modal('show');
+        //         }
+        //     })
+        //     .fail(function (data) {
+        //         console.log(data);
+        //         $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+        //     });
         // }
     });
 
 });
+
+
 
 /********************** Extras **********************/
 
