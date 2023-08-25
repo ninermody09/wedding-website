@@ -277,7 +277,7 @@ $(document).ready(function () {
             // } 
             // console.log("two person invite");
         }else if (three_invite.includes($('#guest_name').val())) {
-            nums1=3
+            nums1=3 e
             // var userChoice = prompt('You have 3 Invite, how many will be attending?');
             // var userChoice = Number(userChoice);
             // while (userChoice > 3) {
